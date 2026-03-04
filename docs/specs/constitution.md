@@ -11,7 +11,7 @@ Este projeto visa o controle rigoroso de ativos de TI (notebooks, mouses, projet
 ## 💻 Stack Tecnológica
 ### Backend (Diretório `/backend`)
 - **Linguagem**: Python 3.x.
-- **Framework**: Flask (seguindo o padrão RESTful).
+- **Framework**: FastAPI (seguindo o padrão RESTful).
 - **Banco de Dados**: SQLite (persistência simples em arquivo `.db`).
 - **Padrão de Resposta**: JSON para todos os endpoints da API.
 
@@ -29,5 +29,5 @@ Este projeto visa o controle rigoroso de ativos de TI (notebooks, mouses, projet
 ## 📂 Organização de Arquivos
 - `/docs/specs/`: Arquivos `.md` definindo as funcionalidades.
 - `/docs/plans/`: Planos de implementação gerados pela IA.
-- `/backend/`: Servidor Flask e banco de dados.
+- `/backend/`: Servidor FastAPI e banco de dados.
 - `/frontend/`: Arquivos estáticos (HTML/JS/CSS).
