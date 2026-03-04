@@ -1,0 +1,14 @@
+[build]
+  command = "echo 'Deploying frontend'"
+  publish = "frontend"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production.env]
+  REACT_APP_API_URL = "https://controle-ativos.fly.dev"
+
+[context.deploy-preview.env]
+  REACT_APP_API_URL = "https://controle-ativos.fly.dev"

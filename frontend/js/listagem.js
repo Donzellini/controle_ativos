@@ -1,7 +1,7 @@
 /**
  * Listagem (list ativos)
  */
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://controle-ativos.fly.dev/api';
 let allAtivos = [];
 let filteredAtivos = [];
 let currentPage = 1;
