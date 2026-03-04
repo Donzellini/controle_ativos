@@ -1,7 +1,7 @@
 /**
  * Edit ativo handler
  */
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://controle-ativos.fly.dev/api';
 
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
