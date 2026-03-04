@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Ativos - Controle de Ativos de TI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-diagram-3"></i> Controle de Ativos
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cadastro.html">
+                            <i class="bi bi-plus-circle"></i> Novo Ativo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="listagem.html">
+                            <i class="bi bi-list"></i> Listagem
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-4">
+                    <h1 class="mb-4">
+                        <i class="bi bi-list"></i> Listagem de Ativos
+                    </h1>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="searchInput" 
+                                   placeholder="Pesquisar por série ou descrição...">
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-select" id="statusFilter">
+                                <option value="">-- Filtrar por Status --</option>
+                                <option value="Disponível">Disponível</option>
+                                <option value="Emprestado">Emprestado</option>
+                                <option value="Danificado">Danificado</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="loadingSpinner" class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <p>Carregando ativos...</p>
+                    </div>
+
+                    <div id="emptyMessage" class="alert alert-info d-none" role="alert">
+                        <i class="bi bi-info-circle"></i>
+                        Nenhum ativo encontrado. <a href="cadastro.html">Cadastre um novo ativo</a>
+                    </div>
+
+                    <div id="errorMessage" class="alert alert-danger d-none" role="alert">
+                        <i class="bi bi-exclamation-circle"></i>
+                        Erro ao carregar ativos. Tente novamente.
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover" id="ativosTable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Descrição</th>
+                                <th>Série</th>
+                                <th>Status</th>
+                                <th>Localização</th>
+                                <th>Valor Estimado</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ativosTableBody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <a href="cadastro.html" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Novo Ativo
+                    </a>
+                    <div id="paginationInfo" class="text-muted"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p>&copy; 2026 Controle de Ativos de TI. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Modal for details -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Detalhes do Ativo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="detailsModalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <a id="editButton" href="#" class="btn btn-primary">Editar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/listagem.js"></script>
+</body>
+</html>

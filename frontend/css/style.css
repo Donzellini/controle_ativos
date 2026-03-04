@@ -1,0 +1,94 @@
+/* Custom styles */
+:root {
+    --status-disponivel: #28a745;
+    --status-emprestado: #ffc107;
+    --status-danificado: #dc3545;
+    --status-inativo: #6c757d;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    margin-bottom: 1rem;
+}
+
+.badge {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.badge-disponivel {
+    background-color: var(--status-disponivel);
+}
+
+.badge-emprestado {
+    background-color: var(--status-emprestado);
+    color: #000;
+}
+
+.badge-danificado {
+    background-color: var(--status-danificado);
+}
+
+.badge-inativo {
+    background-color: var(--status-inativo);
+}
+
+.alert-success {
+    margin-top: 1rem;
+}
+
+.form-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.table-responsive {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+/* Toast notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.btn-link {
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+footer {
+    margin-top: auto;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
