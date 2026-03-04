@@ -1,5 +1,5 @@
-app = 'controle-ativos'
-primary_region = 'gru'
+app = "controle-ativos"
+primary_region = "gru"
 
 [build]
   dockerfile = "Dockerfile"
