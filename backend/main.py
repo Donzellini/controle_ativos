@@ -3,7 +3,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
-from routes import ativos
+from routes import ativos, responsabilidades
 
 # Configure logging
 logging.basicConfig(
@@ -38,6 +38,7 @@ async def startup():
 
 # Include routers
 app.include_router(ativos.router, prefix="/api", tags=["ativos"])
+app.include_router(responsabilidades.router, prefix="/api", tags=["responsabilidades"])
 
 
 @app.get("/")

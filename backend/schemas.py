@@ -80,3 +80,85 @@ class ErrorResponse(BaseModel):
     """Schema for error response"""
     error: str
     field: Optional[str] = None
+
+
+class StatusResponsabilidade(str, PyEnum):
+    """Status enum for Chromebook responsibility"""
+    PENDENTE = "Pendente"
+    DEVOLVIDO = "Devolvido"
+    COM_FALTA = "Com falta"
+    NAO_REALIZADO = "Não realizado"
+
+
+class ProfessorCreate(BaseModel):
+    """Schema for creating a professor"""
+    nome: str = Field(..., min_length=1, max_length=255)
+    email: Optional[str] = Field(None, max_length=255)
+
+    @field_validator("nome")
+    @classmethod
+    def validate_nome(cls, v):
+        if not v.strip():
+            raise ValueError("Nome não pode ser vazio")
+        return v.strip()
+
+
+class ProfessorResponse(BaseModel):
+    """Schema for professor response"""
+    id: int
+    nome: str
+    email: Optional[str] = None
+    criado_em: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class ResponsabilidadeCreate(BaseModel):
+    """Schema for creating a Chromebook responsibility"""
+    professor_id: int
+    data: datetime
+    periodo_turma: str = Field(..., min_length=1, max_length=10)
+    quantidade_chromebooks: int = Field(..., ge=1)
+    observacoes: Optional[str] = Field(None, max_length=500)
+
+    @field_validator("quantidade_chromebooks")
+    @classmethod
+    def validate_quantidade(cls, v):
+        if v <= 0:
+            raise ValueError("Quantidade deve ser maior que zero")
+        return v
+
+    @field_validator("periodo_turma")
+    @classmethod
+    def validate_periodo(cls, v):
+        periodos_validos = ["1ºA", "2ºA", "2ºB", "3ºA", "3ºB", "3ºC", "4ºA", "4ºB", "4ºC", "5ºA", "5ºB", "5ºC"]
+        if v not in periodos_validos:
+            # Apenas aviso, permite outros valores (MVP flexível)
+            pass
+        return v
+
+
+class ResponsabilidadeUpdate(BaseModel):
+    """Schema for updating a Chromebook responsibility (status and notes)"""
+    status: Optional[StatusResponsabilidade] = None
+    observacoes: Optional[str] = Field(None, max_length=500)
+
+    class Config:
+        from_attributes = True
+
+
+class ResponsabilidadeResponse(BaseModel):
+    """Schema for Chromebook responsibility response"""
+    id: int
+    professor_id: int
+    data: datetime
+    periodo_turma: str
+    quantidade_chromebooks: int
+    status: StatusResponsabilidade
+    observacoes: Optional[str] = None
+    criado_em: datetime
+    atualizado_em: datetime
+
+    class Config:
+        from_attributes = True

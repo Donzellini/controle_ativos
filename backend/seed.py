@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from database import SessionLocal, init_db
-from models import TipoAtivo, Ativo, StatusAtivo
+from models import TipoAtivo, Ativo, StatusAtivo, Professor
 
 load_dotenv()
 
@@ -45,6 +45,21 @@ def seed_database():
         
         db.commit()
         print(f"✅ Created {len(tipos)} TipoAtivo records")
+        
+        # Create Professor records (for Chromebook responsibility tracking)
+        professores = [
+            Professor(nome="Maria Silva", email="maria@escola.edu.br"),
+            Professor(nome="Ana Santos", email="ana@escola.edu.br"),
+            Professor(nome="Carla Oliveira", email="carla@escola.edu.br"),
+            Professor(nome="Diane Costa", email="diane@escola.edu.br"),
+            Professor(nome="Elaine Martins", email="elaine@escola.edu.br"),
+        ]
+        
+        for professor in professores:
+            db.add(professor)
+        
+        db.commit()
+        print(f"✅ Created {len(professores)} Professor records")
         
         # Get first tipo for sample data
         notebook_tipo = db.query(TipoAtivo).filter(TipoAtivo.nome == "Notebook").first()

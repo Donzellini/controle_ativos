@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma de Responsabilidades - Controle de Ativos de TI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-diagram-3"></i> Controle de Ativos
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="responsabilidadesMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-calendar-check"></i> Responsabilidades
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="responsabilidadesMenu">
+                            <li><a class="dropdown-item" href="responsabilidade-form.html">
+                                <i class="bi bi-plus-circle"></i> Nova Responsabilidade
+                            </a></li>
+                            <li><a class="dropdown-item active" href="cronograma.html">
+                                <i class="bi bi-calendar3"></i> Cronograma
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="listagem.html">
+                            <i class="bi bi-list"></i> Ativos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container-fluid my-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="mb-4">
+                    <i class="bi bi-calendar3"></i> Cronograma de Responsabilidades
+                </h1>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label for="filterProfessor" class="form-label">Filtrar por Professor</label>
+                <select class="form-select" id="filterProfessor">
+                    <option value="">-- Todos os professores --</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="filterMes" class="form-label">Mês</label>
+                <select class="form-select" id="filterMes">
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3" selected>Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="filterAno" class="form-label">Ano</label>
+                <select class="form-select" id="filterAno">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026" selected>2026</option>
+                    <option value="2027">2027</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Botão Nova Responsabilidade -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <a href="responsabilidade-form.html" class="btn btn-primary btn-lg">
+                    <i class="bi bi-plus-circle"></i> Nova Responsabilidade
+                </a>
+            </div>
+        </div>
+
+        <!-- Alerta de carregamento -->
+        <div id="loadingAlert" class="alert alert-info" role="alert">
+            <i class="bi bi-hourglass-split"></i> Carregando cronograma...
+        </div>
+
+        <!-- Alerta de erro -->
+        <div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+            <i class="bi bi-exclamation-circle"></i>
+            <strong id="errorMessage">Erro ao carregar cronograma</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Tabela de Cronograma -->
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped" id="cronogramaTable">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Data</th>
+                                <th>Dia da Semana</th>
+                                <th>Professor</th>
+                                <th>Período/Turma</th>
+                                <th>Quantidade</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cronogramaBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="emptyMessage" class="alert alert-warning d-none" role="alert">
+                    <i class="bi bi-info-circle"></i> Nenhuma responsabilidade registrada para o período selecionado.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Edição de Status -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Editar Responsabilidade</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalDetails" class="mb-3">
+                        <p><strong>Professor:</strong> <span id="modalProfessor"></span></p>
+                        <p><strong>Data:</strong> <span id="modalData"></span></p>
+                        <p><strong>Período:</strong> <span id="modalPeriodo"></span></p>
+                        <p><strong>Quantidade:</strong> <span id="modalQuantidade"></span> Chromebooks</p>
+                    </div>
+                    <form id="editForm">
+                        <div class="mb-3">
+                            <label for="editStatus" class="form-label">Status</label>
+                            <select class="form-select" id="editStatus">
+                                <option value="Pendente">Pendente</option>
+                                <option value="Devolvido">Devolvido</option>
+                                <option value="Com falta">Com falta</option>
+                                <option value="Não realizado">Não realizado</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editObservacoes" class="form-label">Observações</label>
+                            <textarea class="form-control" id="editObservacoes" rows="3" maxlength="500"></textarea>
+                            <small class="text-muted">Máximo 500 caracteres</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="saveEditBtn">Salvar Mudanças</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/cronograma.js"></script>
+</body>
+</html>

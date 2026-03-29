@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Responsabilidade - Controle de Ativos de TI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-diagram-3"></i> Controle de Ativos
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="responsabilidadesMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-calendar-check"></i> Responsabilidades
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="responsabilidadesMenu">
+                            <li><a class="dropdown-item" href="responsabilidade-form.html">
+                                <i class="bi bi-plus-circle"></i> Nova Responsabilidade
+                            </a></li>
+                            <li><a class="dropdown-item" href="cronograma.html">
+                                <i class="bi bi-calendar3"></i> Cronograma
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="listagem.html">
+                            <i class="bi bi-list"></i> Ativos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="form-section">
+                    <h1 class="mb-4">
+                        <i class="bi bi-plus-circle"></i> Registrar Responsabilidade de Chromebooks
+                    </h1>
+                    
+                    <div id="successAlert" class="alert alert-success alert-dismissible fade show d-none" role="alert">
+                        <i class="bi bi-check-circle"></i>
+                        <strong id="successMessage">Responsabilidade registrada com sucesso!</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <div id="errorAlert" class="alert alert-danger alert-dismissible fade show d-none" role="alert">
+                        <i class="bi bi-exclamation-circle"></i>
+                        <strong id="errorMessage">Erro ao registrar responsabilidade</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <form id="responsabilidadeForm" novalidate>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="professor_id" class="form-label">Professor *</label>
+                                <select class="form-select" id="professor_id" name="professor_id" required>
+                                    <option value="">-- Carregando professores --</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Selecione um professor
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="data" class="form-label">Data *</label>
+                                <input type="date" class="form-control" id="data" name="data" required>
+                                <div class="invalid-feedback">
+                                    Data é obrigatória
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="periodo_turma" class="form-label">Período/Turma *</label>
+                                <select class="form-select" id="periodo_turma" name="periodo_turma" required>
+                                    <option value="">-- Selecione o período --</option>
+                                    <option value="1ºA">1ºA</option>
+                                    <option value="2ºA">2ºA</option>
+                                    <option value="2ºB">2ºB</option>
+                                    <option value="3ºA">3ºA</option>
+                                    <option value="3ºB">3ºB</option>
+                                    <option value="3ºC">3ºC</option>
+                                    <option value="4ºA">4ºA</option>
+                                    <option value="4ºB">4ºB</option>
+                                    <option value="4ºC">4ºC</option>
+                                    <option value="5ºA">5ºA</option>
+                                    <option value="5ºB">5ºB</option>
+                                    <option value="5ºC">5ºC</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Selecione o período/turma
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="quantidade_chromebooks" class="form-label">Quantidade de Chromebooks *</label>
+                                <input type="number" class="form-control" id="quantidade_chromebooks" name="quantidade_chromebooks" 
+                                       required min="1" max="100" placeholder="Ex: 20">
+                                <div class="invalid-feedback">
+                                    Quantidade deve ser maior que zero
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="observacoes" class="form-label">Observações</label>
+                                <textarea class="form-control" id="observacoes" name="observacoes" rows="3" 
+                                          maxlength="500" placeholder="Adicione observações se necessário..."></textarea>
+                                <small class="text-muted">Máximo 500 caracteres</small>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-start">
+                            <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                <i class="bi bi-check-lg"></i> Registrar Responsabilidade
+                            </button>
+                            <button type="reset" class="btn btn-secondary btn-lg">
+                                <i class="bi bi-arrow-clockwise"></i> Limpar
+                            </button>
+                            <a href="cronograma.html" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-calendar3"></i> Ver Cronograma
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/responsabilidade.js"></script>
+</body>
+</html>

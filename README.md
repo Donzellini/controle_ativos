@@ -79,7 +79,7 @@ O servidor estará disponível em: `http://localhost:8000`
 1. **Abra o navegador** e acesse:
 
 ```
-http://localhost:5500/frontend/index.html
+http://localhost:5500
 ```
 
 Ou use Live Server do VS Code ou outro servidor web:

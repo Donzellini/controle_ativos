@@ -22,6 +22,19 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="index.html">Inicio</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="responsabilidadesMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-calendar-check"></i> Responsabilidades
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="responsabilidadesMenu">
+                            <li><a class="dropdown-item" href="responsabilidade-form.html">
+                                <i class="bi bi-plus-circle"></i> Nova Responsabilidade
+                            </a></li>
+                            <li><a class="dropdown-item" href="cronograma.html">
+                                <i class="bi bi-calendar3"></i> Cronograma
+                            </a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="cadastro.html">
                             <i class="bi bi-plus-circle"></i> Novo Ativo
@@ -45,12 +58,26 @@
                     <p class="lead">Sistema para gerenciamento de ativos de TI</p>
                     <hr class="my-4">
                     <p>Utilize o menu acima para navegar pelo sistema.</p>
-                    <a class="btn btn-primary btn-lg" href="cadastro.html" role="button">
-                        <i class="bi bi-plus-circle"></i> Cadastrar Novo Ativo
-                    </a>
-                    <a class="btn btn-secondary btn-lg ms-2" href="listagem.html" role="button">
-                        <i class="bi bi-list"></i> Ver Lista de Ativos
-                    </a>
+                    
+                    <div class="mb-3">
+                        <h5 class="mt-4 mb-3"><i class="bi bi-diagram-3"></i> Gerenciar Ativos</h5>
+                        <a class="btn btn-primary btn-lg" href="cadastro.html" role="button">
+                            <i class="bi bi-plus-circle"></i> Cadastrar Novo Ativo
+                        </a>
+                        <a class="btn btn-secondary btn-lg ms-2" href="listagem.html" role="button">
+                            <i class="bi bi-list"></i> Ver Lista de Ativos
+                        </a>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="mt-4 mb-3"><i class="bi bi-calendar-check"></i> Responsabilidades de Chromebooks</h5>
+                        <a class="btn btn-success btn-lg" href="responsabilidade-form.html" role="button">
+                            <i class="bi bi-plus-circle"></i> Nova Responsabilidade
+                        </a>
+                        <a class="btn btn-info btn-lg ms-2" href="cronograma.html" role="button">
+                            <i class="bi bi-calendar3"></i> Ver Cronograma
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
