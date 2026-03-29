@@ -143,23 +143,23 @@ Diagrama detalhado mostrando o fluxo completo de dados entre Frontend, Backend e
 ┌─────────────────────────────────────────────────────────────────────┐
 │  Frontend (HTML + JavaScript)                                       │
 │  ─────────────────────────────────────────────────────────────────  │
-│  index.html → cadastro.html → listagem.html → editar.html         │
-│  responsabilidade-form.html → cronograma.html                      │
+│  index.html → cadastro.html → listagem.html → editar.html           │
+│  responsabilidade-form.html → cronograma.html                       │
 └──────────────────────────────────────────────────────────────────┬──┘
                           ↓ POST/GET/PUT
 ┌─────────────────────────────────────────────────────────────────────┐
 │  Backend (FastAPI / Python)                                         │
 │  ─────────────────────────────────────────────────────────────────  │
-│  routes/ativos.py ←→ routes/responsabilidades.py                  │
-│  ↓ schemas.py (Pydantic validation)                                │
-│  ↓ models.py (SQLAlchemy ORM)                                      │
-│  ↓ database.py (SessionLocal · init_db)                            │
+│  routes/ativos.py ←→ routes/responsabilidades.py                    │
+│  ↓ schemas.py (Pydantic validation)                                 │
+│  ↓ models.py (SQLAlchemy ORM)                                       │
+│  ↓ database.py (SessionLocal · init_db)                             │
 └──────────────────────────────────────────────────────────────────┬──┘
                           ↓ CRUD Operations
 ┌─────────────────────────────────────────────────────────────────────┐
 │  Banco de Dados (SQLite)                                            │
 │  ─────────────────────────────────────────────────────────────────  │
-│  tipo_ativo → ativo ↔ professor ↔ responsabilidade_chromebook      │
+│  tipo_ativo → ativo ↔ professor ↔ responsabilidade_chromebook       │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
