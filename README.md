@@ -164,7 +164,7 @@ graph TB
 
     Cadastro -->|POST /api/ativos| Routes
     Listagem -->|GET /api/ativos| Routes
-    Editar -->|PUT /api/ativos/{id}| Routes
+    Editar -->|PUT /api/ativos| Routes
     Responsabilidade -->|POST /api/responsabilidades| Routes
     Cronograma -->|GET /api/cronograma| Routes
     Index -->|Navegação| Cadastro
