@@ -114,6 +114,27 @@ Ou use Live Server VS Code.
 http://localhost:5500
 ```
 
+## 🚀 Deployment em Produção
+
+A aplicação está configurada para rodar na **Fly.io** com otimizações de economia de recursos:
+
+### ⚡ Economia de Recursos
+
+```
+✅ A máquina desliga automaticamente quando não está em uso
+✅ Reinicia automaticamente quando alguém acessa
+✅ Usa apenas 1GB de RAM com CPU compartilhada
+```
+
+**Por quê?** Como é uma aplicação de faculdade com uso eventual, a configuração permite:
+- **Auto scale down**: máquina dorme após 5 minutos sem requisição
+- **Min machines = 0**: pode desligar 100% quando não está em uso
+- **Auto restart**: liga automaticamente ao receber requisição
+
+Isso reduz drasticamente os custos de hospedagem em aplicações com baixa demanda constante.
+
+Para mais detalhes sobre a configuração, veja [fly.toml](./backend/fly.toml).
+
 ---
 
 ## 📌 IMPLEMENTAÇÃO TÉCNICA DETALHADA

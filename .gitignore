@@ -31,3 +31,8 @@ env/
 htmlcov/
 *.sqlite3
 *.sqlite
+.idea/
+.vscode/
+node_modules/
+dist/
+*.log
