@@ -135,6 +135,71 @@ Isso reduz drasticamente os custos de hospedagem em aplicações com baixa deman
 
 Para mais detalhes sobre a configuração, veja [fly.toml](./backend/fly.toml).
 
+## 📊 Fluxo de Dados da Aplicação
+
+```mermaid
+graph TB
+    subgraph Frontend["🖥️ Frontend"]
+        Index["index.html<br/>(Página Inicial)"]
+        Cadastro["cadastro.html<br/>(Novo Ativo)"]
+        Listagem["listagem.html<br/>(Ativos)"]
+        Editar["editar.html<br/>(Editar Ativo)"]
+        Responsabilidade["responsabilidade-form.html<br/>(Chromebook)"]
+        Cronograma["cronograma.html<br/>(Cronograma)"]
+    end
+
+    subgraph Backend["⚙️ Backend - FastAPI"]
+        Routes["routes/<br/>ativos.py<br/>responsabilidades.py"]
+        Models["Modelos SQLAlchemy<br/>Ativo<br/>TipoAtivo<br/>Professor<br/>ResponsabilidadeChromebook"]
+        Schemas["Schemas Pydantic<br/>Validações"]
+        Business["Lógica de Negócio<br/>Criação<br/>Edição<br/>Filtros"]
+    end
+
+    subgraph Database["🗄️ SQLite - ativos.db"]
+        TipoAtivoTable["📋 tipo_ativo<br/>(Notebook, Desktop...)"]
+        AtivoTable["📦 ativo<br/>(Serial, Valor, Status...)"]
+        ProfessorTable["👨‍🏫 professor<br/>(Nome, Email)"]
+        ResponsavelTable["📝 responsabilidade_chromebook<br/>(Período, Status)"]
+    end
+
+    Cadastro -->|POST /api/ativos| Routes
+    Listagem -->|GET /api/ativos| Routes
+    Editar -->|PUT /api/ativos/{id}| Routes
+    Responsabilidade -->|POST /api/responsabilidades| Routes
+    Cronograma -->|GET /api/cronograma| Routes
+    Index -->|Navegação| Cadastro
+    Index -->|Navegação| Listagem
+    Index -->|Navegação| Responsabilidade
+    Index -->|Navegação| Cronograma
+
+    Routes -->|Valida| Schemas
+    Schemas -->|Executa| Business
+    Business -->|Consulta| Models
+
+    Models -->|CRUD| TipoAtivoTable
+    Models -->|CRUD| AtivoTable
+    Models -->|CRUD| ProfessorTable
+    Models -->|CRUD| ResponsavelTable
+
+    AtivoTable -->|FK| TipoAtivoTable
+    ResponsavelTable -->|FK| ProfessorTable
+    ResponsavelTable -->|FK| AtivoTable
+
+    Routes -->|JSON Response| Cadastro
+    Routes -->|JSON Response| Listagem
+    Routes -->|JSON Response| Editar
+    Routes -->|JSON Response| Responsabilidade
+    Routes -->|JSON Response| Cronograma
+
+    style Frontend fill:#e1f5ff
+    style Backend fill:#fff3e0
+    style Database fill:#f3e5f5
+    style TipoAtivoTable fill:#e8f5e9
+    style AtivoTable fill:#e8f5e9
+    style ProfessorTable fill:#e8f5e9
+    style ResponsavelTable fill:#e8f5e9
+```
+
 ---
 
 ## 📌 IMPLEMENTAÇÃO TÉCNICA DETALHADA
