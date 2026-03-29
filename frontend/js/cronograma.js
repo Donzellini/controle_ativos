@@ -2,7 +2,7 @@
  * Gerenciamento de Cronograma de Responsabilidades
  */
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://controle-ativos.fly.dev/api';
 
 // Elementos do DOM
 const filterProfessor = document.getElementById('filterProfessor');

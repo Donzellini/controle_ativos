@@ -2,7 +2,7 @@
  * Gerenciamento de Responsabilidade de Chromebooks
  */
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://controle-ativos.fly.dev/api';
 
 // Elementos do DOM
 const form = document.getElementById('responsabilidadeForm');
